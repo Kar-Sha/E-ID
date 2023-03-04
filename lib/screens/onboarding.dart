@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -10,6 +11,7 @@ class Onboarding extends StatefulWidget {
 
 class _Onboarding extends State<Onboarding> {
   final _controller = PageController();
+  bool isLastPage = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,15 +20,26 @@ class _Onboarding extends State<Onboarding> {
       body: SafeArea(
         child: Column(
           children: [
-            Text(
-              "Back",
-              style: TextStyle(color: Colors.white),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+                // ignore: prefer_const_literals_to_create_immutables
+                child: Row(children: [
+                  const Text(
+                    "Back",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ]),
+              ),
             ),
             Container(
-              height: 600,
+              height: 550,
               child: PageView(
                 scrollDirection: Axis.horizontal,
                 controller: _controller,
+                onPageChanged: (index) {
+                  setState(() => isLastPage = index == 2);
+                },
                 children: const [
                   OnboardingList(
                     icone: Icons.check_circle_outline,
@@ -34,9 +47,12 @@ class _Onboarding extends State<Onboarding> {
                         "Start by selecting your school and entering your student ID",
                   ),
                   OnboardingList(
-                    icone: Icons.check_circle_outline,
-                    description:
-                        "Start by selecting your school and entering your student ID",
+                    icone: Icons.camera,
+                    description: "Authenticate with facial recognition",
+                  ),
+                  OnboardingList(
+                    icone: Icons.tag_faces_outlined,
+                    description: "Your ID at a touch of a button",
                   ),
                 ],
               ),
@@ -44,6 +60,35 @@ class _Onboarding extends State<Onboarding> {
           ],
         ),
       ),
+      bottomSheet: isLastPage
+          ? Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[900],
+              ),
+              height: 80,
+              alignment: Alignment.center,
+              child: TextButton(
+                child: const Text(
+                  "Get Started",
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                onPressed: () async {},
+              ))
+          : Container(
+              color: Colors.grey[900],
+              alignment: Alignment.center,
+              height: 80,
+              child: SmoothPageIndicator(
+                controller: _controller,
+                count: 3,
+                effect: WormEffect(activeDotColor: Colors.grey.shade800),
+                onDotClicked: (index) => _controller.animateToPage(
+                  index,
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeIn,
+                ),
+              ),
+            ),
     );
   }
 }

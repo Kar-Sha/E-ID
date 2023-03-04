@@ -14,13 +14,13 @@ class OnboardingList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 25.0),
       child: Container(
-        alignment: Alignment.topCenter,
         child: Column(
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 150.0, bottom: 50.0),
               child: Icon(
                 icone,
+                size: 130,
                 color: Colors.grey[400],
               ),
             ),
