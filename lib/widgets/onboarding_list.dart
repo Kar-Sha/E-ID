@@ -17,7 +17,7 @@ class OnboardingList extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 150.0, bottom: 50.0),
+              padding: const EdgeInsets.only(top: 130.0, bottom: 50.0),
               child: Icon(
                 icone,
                 size: 130,

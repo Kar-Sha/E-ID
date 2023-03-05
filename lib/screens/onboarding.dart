@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:local_auth_ex/screens/home_page.dart';
+import 'package:local_auth_ex/screens/new_login.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -23,18 +24,28 @@ class _Onboarding extends State<Onboarding> {
           children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.only(top: 20.0, left: 20.0),
+                padding: const EdgeInsets.only(top: 15.0, left: 20.0),
                 // ignore: prefer_const_literals_to_create_immutables
                 child: Row(children: [
-                  const Text(
-                    "Back",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => Newlogin()),
+                      );
+                    },
+                    child: const Text(
+                      "Back",
+                    ),
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 15),
+                    ),
                   ),
                 ]),
               ),
             ),
             Container(
-              height: 550,
+              height: 500,
               child: PageView(
                 scrollDirection: Axis.horizontal,
                 controller: _controller,
