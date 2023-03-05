@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth_ex/screens/home_page.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -63,7 +64,7 @@ class _Onboarding extends State<Onboarding> {
       bottomSheet: isLastPage
           ? Container(
               decoration: BoxDecoration(
-                color: Colors.grey[900],
+                color: Colors.grey[800],
               ),
               height: 80,
               alignment: Alignment.center,
@@ -72,7 +73,11 @@ class _Onboarding extends State<Onboarding> {
                   "Get Started",
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                onPressed: () async {},
+                onPressed: () async {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomePage()),
+                  );
+                },
               ))
           : Container(
               color: Colors.grey[900],
