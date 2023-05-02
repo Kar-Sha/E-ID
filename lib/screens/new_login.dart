@@ -4,6 +4,7 @@ import 'package:local_auth_ex/screens/onboarding.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:local_auth_ex/services/auth.dart';
 
 class Newlogin extends StatefulWidget {
   const Newlogin({Key? key}) : super(key: key);
@@ -77,7 +78,23 @@ class _Newlogin extends State<Newlogin> {
                           height: 15,
                         ),
                         TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+                            bool isAuthenticated =
+                                await AuthService.authenticateUser();
+                            if (isAuthenticated) {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const HomePage()),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Authentication failed.'),
+                                ),
+                              );
+                            }
+                          },
                           child: const Text(
                             "Login with ID",
                           ),
