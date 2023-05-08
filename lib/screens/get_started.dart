@@ -10,7 +10,7 @@ class GetStarted extends StatefulWidget {
 }
 
 class _GetStartedState extends State<GetStarted> {
-  String dropdownValue = 'Dog';
+  String dropdownValue = 'Select School';
 
   String? selectedValue;
   final TextEditingController textEditingController = TextEditingController();
@@ -28,13 +28,47 @@ class _GetStartedState extends State<GetStarted> {
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(40.0),
+                padding: const EdgeInsets.all(20.0),
                 child: Column(children: [
                   Text("Select Your School",
                       style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      )),
+                  DropdownButtonFormField(
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(
+                            const Radius.circular(10.0),
+                          ),
+                        ),
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[800]),
+                        hintText: "Select School",
+                        fillColor: Colors.white),
+                    value: dropdownValue,
+                    // Step 4.
+                    items: <String>[
+                      'Select School',
+                      'San Jose State University',
+                      'Other'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(fontSize: 20),
+                        ),
+                      );
+                    }).toList(),
+                    // Step 5.
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                      });
+                    },
+                  ),
                 ]),
               ),
             ),
