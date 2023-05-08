@@ -101,7 +101,7 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      Navigator.of(context).pushReplacement(
+                      Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => StudentID()),
                       );
                     },

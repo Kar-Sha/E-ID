@@ -22,18 +22,18 @@ class HomeList extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(Icons.info_outline),
+                      child: Icon(Icons.check_box_outlined),
                     ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text("View ID Information",
+                        Text("Attendance",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
                         SizedBox(height: 2),
-                        Text("See your balance",
+                        Text("Check-in for exam attendance",
                             style: TextStyle(fontSize: 12)),
                       ],
                     ),
