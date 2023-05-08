@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeList extends StatelessWidget {
   const HomeList({Key? key}) : super(key: key);
@@ -119,8 +120,23 @@ class HomeList extends StatelessWidget {
                     ),
                   ],
                 ),
-
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {
+                    const url = 'https://myid.sjsu.edu/FAQ.aspx';
+                    // ignore: deprecated_member_use
+                    if (await canLaunch(url)) {
+                      // ignore: deprecated_member_use
+                      await launch(url,
+                          forceSafariVC: true, forceWebView: true);
+                    } else {
+                      throw 'Could not launch $url';
+                    }
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 32,
+                  ),
+                ),
               ],
             ),
           ],
