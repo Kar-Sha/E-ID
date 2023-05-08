@@ -1,6 +1,8 @@
 // Select School
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:local_auth_ex/screens/onboarding.dart';
+import 'package:local_auth_ex/screens/student_id.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({Key? key}) : super(key: key);
@@ -25,10 +27,34 @@ class _GetStartedState extends State<GetStarted> {
       child: Scaffold(
         backgroundColor: Colors.black.withOpacity(0.7),
         body: SafeArea(
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(20.0),
+                padding: const EdgeInsets.only(top: 15.0, left: 20.0),
+                // ignore: prefer_const_literals_to_create_immutables
+                child: Row(children: [
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => Onboarding()),
+                      );
+                    },
+                    child: const Text(
+                      "Back",
+                    ),
+                    style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 15),
+                    ),
+                  ),
+                ]),
+              ),
+            ),
+            SizedBox(height: 150.0),
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(27.0),
                 child: Column(children: [
                   Text("Select Your School",
                       style: TextStyle(
@@ -36,6 +62,7 @@ class _GetStartedState extends State<GetStarted> {
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       )),
+                  SizedBox(height: 30.0),
                   DropdownButtonFormField(
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
@@ -58,7 +85,7 @@ class _GetStartedState extends State<GetStarted> {
                         value: value,
                         child: Text(
                           value,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(fontSize: 16),
                         ),
                       );
                     }).toList(),
@@ -68,6 +95,26 @@ class _GetStartedState extends State<GetStarted> {
                         dropdownValue = newValue!;
                       });
                     },
+                  ),
+                  SizedBox(
+                    height: 200,
+                  ),
+                  TextButton(
+                    onPressed: () async {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => StudentID()),
+                      );
+                    },
+                    child: const Text(
+                      "Next",
+                    ),
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.only(
+                          top: 16.0, bottom: 16.0, left: 150, right: 150),
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 16),
+                      backgroundColor: Colors.grey[700],
+                    ),
                   ),
                 ]),
               ),
