@@ -5,6 +5,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:local_auth_ex/screens/home_page.dart';
+import 'package:local_auth_ex/screens/new_login.dart';
+import 'package:local_auth_ex/screens/settings.dart';
 import 'package:local_auth_ex/widgets/home_list.dart';
 import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
@@ -50,9 +52,13 @@ class _Profile extends State<Profile> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                  },
                   icon: Icon(
-                    Icons.settings,
+                    Icons.info,
                     size: 32,
                   ),
                 ),
@@ -60,34 +66,119 @@ class _Profile extends State<Profile> {
             ),
           )),
       body: SafeArea(
-        child: Column(children: [
-          //app bar
-          Padding(
-            padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: const [
-                    Text(
-                      "My",
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
+        child: Padding(
+          padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            //app bar
+            Padding(
+              padding: const EdgeInsets.all(0.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: const [
+                      Text(
+                        "My",
+                        style: TextStyle(
+                          fontSize: 28,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      " Profile",
-                      style: TextStyle(fontSize: 28),
-                    )
-                  ],
-                ),
-              ],
+                      Text(
+                        " Profile",
+                        style: TextStyle(fontSize: 28),
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
 
-          SizedBox(height: 25),
-        ]),
+            SizedBox(height: 50),
+
+            Text(
+              'Name',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'FirstN LastN',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 25),
+
+            Text(
+              'Institution',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              'San Jose State University',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 25),
+
+            Text(
+              'Student ID',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              '000000000',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+            SizedBox(height: 25),
+
+            Text(
+              'Balance',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              '0.00',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            ),
+
+            SizedBox(height: 130),
+
+            Container(
+              child: TextButton(
+                onPressed: () async {
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => Newlogin()),
+                  );
+                },
+                child: const Text(
+                  "Logout",
+                ),
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.only(
+                      top: 16.0, bottom: 16.0, left: 155, right: 155),
+                  primary: Colors.white,
+                  textStyle: const TextStyle(fontSize: 16),
+                  backgroundColor: Colors.grey[800],
+                ),
+              ),
+            )
+          ]),
+        ),
       ),
     );
   }

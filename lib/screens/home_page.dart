@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:local_auth_ex/screens/profile.dart';
+import 'package:local_auth_ex/screens/settings.dart';
 import 'package:local_auth_ex/widgets/home_list.dart';
 import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
@@ -51,9 +52,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Settings()),
+                    );
+                  },
                   icon: Icon(
-                    Icons.settings,
+                    Icons.info,
                     size: 32,
                   ),
                 ),
