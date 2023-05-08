@@ -80,7 +80,7 @@ class _StudentID extends State<StudentID> {
                     SizedBox(height: 30.0),
                     TextButton(
                       onPressed: () async {
-                        Navigator.of(context).pop(
+                        Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => HomePage()),
                         );
                       },
