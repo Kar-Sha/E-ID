@@ -27,7 +27,7 @@ class _StudentID extends State<StudentID> {
         backgroundColor: Colors.black.withOpacity(0.7),
         body: SafeArea(
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
               child: Padding(
                 padding: const EdgeInsets.only(top: 15.0, left: 20.0),
@@ -57,21 +57,30 @@ class _StudentID extends State<StudentID> {
                 child: Padding(
                   padding: const EdgeInsets.all(25.0),
                   child: Column(children: [
-                    Text("Enter Your School ID",
+                    Text("Enter Your School Information",
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         )),
-                    SizedBox(height: 30.0),
                     SizedBox(
                       height: 20,
                     ),
                     TextField(
+                      style: TextStyle(fontSize: 20),
+                      decoration: InputDecoration(
+                          filled: true, //<-- SEE HERE
+                          fillColor: Colors.white,
+                          hintText: 'First Name and Last Name'),
+                    ),
+                    SizedBox(height: 15.0),
+                    TextField(
                         decoration: InputDecoration(
                           filled: true, //<-- SEE HERE
                           fillColor: Colors.white,
+                          hintText: 'School ID',
                         ),
+                        style: TextStyle(fontSize: 20),
                         keyboardType: TextInputType.number,
                         inputFormatters: <TextInputFormatter>[
                           FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
