@@ -4,6 +4,7 @@ import 'package:local_auth_ex/screens/home_page.dart';
 import 'package:local_auth_ex/screens/new_login.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
