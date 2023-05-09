@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth_ex/screens/attendance.dart';
+import 'package:local_auth_ex/screens/questions.dart';
+import 'package:local_auth_ex/screens/view_history.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeList extends StatelessWidget {
   const HomeList({Key? key}) : super(key: key);
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri(scheme: "https", host: url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Can not launch url";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,25 +35,34 @@ class HomeList extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                       ),
-                      child: Icon(Icons.info_outline),
+                      child: Icon(Icons.check_box_outlined),
                     ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text("View ID Information",
+                        Text("Attendance",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
                         SizedBox(height: 2),
-                        Text("See your balance",
+                        Text("Check-in for exam attendance",
                             style: TextStyle(fontSize: 12)),
                       ],
                     ),
                   ],
                 ),
 
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Attendance()),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
               ],
             ),
             Container(
@@ -80,7 +102,16 @@ class HomeList extends StatelessWidget {
                   ],
                 ),
 
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => History()),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
               ],
             ),
             Container(
@@ -109,18 +140,26 @@ class HomeList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text("Request New Physical Copy",
+                        Text("Frequently Ask Questions",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
                         SizedBox(height: 2),
-                        Text("Visit the SJSU website to schedule",
+                        Text("Learn more about your student ID",
                             style: TextStyle(fontSize: 12)),
                       ],
                     ),
                   ],
                 ),
-
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Questions()),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
               ],
             ),
           ],
