@@ -3,6 +3,15 @@ import 'package:url_launcher/url_launcher.dart';
 
 class HomeList extends StatelessWidget {
   const HomeList({Key? key}) : super(key: key);
+  Future<void> _launchURL(String url) async {
+    final Uri uri = Uri(scheme: "https", host: url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw "Can not launch url";
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +50,12 @@ class HomeList extends StatelessWidget {
                   ],
                 ),
 
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {},
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
               ],
             ),
             Container(
@@ -81,7 +95,12 @@ class HomeList extends StatelessWidget {
                   ],
                 ),
 
-                Icon(Icons.arrow_forward_ios),
+                IconButton(
+                  onPressed: () async {},
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
+                ),
               ],
             ),
             Container(
@@ -105,6 +124,11 @@ class HomeList extends StatelessWidget {
                       ),
                       child: Icon(Icons.credit_card),
                     ),
+                    GestureDetector(
+                      onTap: () {
+                        _launchURL("www.lipsum.com");
+                      },
+                    ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,23 +143,6 @@ class HomeList extends StatelessWidget {
                       ],
                     ),
                   ],
-                ),
-                IconButton(
-                  onPressed: () async {
-                    const url = 'https://myid.sjsu.edu/FAQ.aspx';
-                    // ignore: deprecated_member_use
-                    if (await canLaunch(url)) {
-                      // ignore: deprecated_member_use
-                      await launch(url,
-                          forceSafariVC: true, forceWebView: true);
-                    } else {
-                      throw 'Could not launch $url';
-                    }
-                  },
-                  icon: Icon(
-                    Icons.arrow_forward_ios,
-                    size: 32,
-                  ),
                 ),
               ],
             ),
