@@ -2,7 +2,7 @@
     package="com.example.local_auth_ex">
    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
    <application
-        android:label="local_auth_ex"
+        android:label="E-ID"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
