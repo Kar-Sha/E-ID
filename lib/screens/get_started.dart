@@ -1,7 +1,6 @@
 // Select School
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
 import 'package:local_auth_ex/screens/onboarding.dart';
 import 'package:local_auth_ex/screens/student_id.dart';
 
@@ -103,7 +102,7 @@ class _GetStartedState extends State<GetStarted> {
                   TextButton(
                     onPressed: () async {
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => StudentID()),
                       );
                     },
                     child: const Text(

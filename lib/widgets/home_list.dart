@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:local_auth_ex/screens/attendance.dart';
+import 'package:local_auth_ex/screens/questions.dart';
+import 'package:local_auth_ex/screens/view_history.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeList extends StatelessWidget {
@@ -51,7 +54,11 @@ class HomeList extends StatelessWidget {
                 ),
 
                 IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Attendance()),
+                    );
+                  },
                   icon: Icon(
                     Icons.arrow_forward_ios,
                   ),
@@ -96,7 +103,11 @@ class HomeList extends StatelessWidget {
                 ),
 
                 IconButton(
-                  onPressed: () async {},
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => History()),
+                    );
+                  },
                   icon: Icon(
                     Icons.arrow_forward_ios,
                   ),
@@ -124,25 +135,30 @@ class HomeList extends StatelessWidget {
                       ),
                       child: Icon(Icons.credit_card),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        _launchURL("www.lipsum.com");
-                      },
-                    ),
                     SizedBox(width: 10),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text("Request New Physical Copy",
+                        Text("Frequently Ask Questions",
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold)),
                         SizedBox(height: 2),
-                        Text("Visit the SJSU website to schedule",
+                        Text("Learn more about your student ID",
                             style: TextStyle(fontSize: 12)),
                       ],
                     ),
                   ],
+                ),
+                IconButton(
+                  onPressed: () async {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) => Questions()),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_forward_ios,
+                  ),
                 ),
               ],
             ),

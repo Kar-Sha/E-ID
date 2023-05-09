@@ -50,6 +50,7 @@ class _StudentID extends State<StudentID> {
                 ]),
               ),
             ),
+            SizedBox(height: 120.0),
             Container(
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -63,6 +64,20 @@ class _StudentID extends State<StudentID> {
                           color: Colors.white,
                         )),
                     SizedBox(height: 30.0),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    TextField(
+                        decoration: InputDecoration(
+                          filled: true, //<-- SEE HERE
+                          fillColor: Colors.white,
+                        ),
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                          FilteringTextInputFormatter.digitsOnly
+                        ]),
+                    SizedBox(height: 30.0),
                     TextButton(
                       onPressed: () async {
                         Navigator.of(context).pushReplacement(
@@ -73,7 +88,8 @@ class _StudentID extends State<StudentID> {
                         "Next",
                       ),
                       style: TextButton.styleFrom(
-                        padding: const EdgeInsets.only(top: 16.0, bottom: 16.0),
+                        padding: const EdgeInsets.only(
+                            top: 16.0, bottom: 16.0, left: 138, right: 139),
                         primary: Colors.white,
                         textStyle: const TextStyle(fontSize: 16),
                         backgroundColor: Colors.grey[700],
