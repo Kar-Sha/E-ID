@@ -10,7 +10,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
-import 'package:local_auth_ex/main.dart';
+import 'package:device_info_plus/device_info_plus.dart';
+//import 'package:local_auth_ex/main.dart';
 
 class StudentID extends StatefulWidget {
   const StudentID({Key? key}) : super(key: key);
@@ -141,8 +142,7 @@ class _StudentID extends State<StudentID> {
                         onPressed: () async {
                           if (file != null) {
                             uploadFile();
-                          }
-                          /*
+                          }                          /*
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
@@ -169,7 +169,7 @@ class _StudentID extends State<StudentID> {
   }
 
   getImage() async {
-    var img = await image.pickImage(source: ImageSource.gallery);
+    var img = await image.pickImage(source: ImageSource.camera);
     setState(() {
       file = File(img!.path);
     });
@@ -186,6 +186,18 @@ class _StudentID extends State<StudentID> {
       UploadTask task = imagefile.putFile(file!);
       TaskSnapshot snapshot = await task;
       url = await snapshot.ref.getDownloadURL();
+      String uniqueDeviceId = '';
+
+  var deviceInfo = DeviceInfoPlugin();
+
+  if (Platform.isIOS) { // import 'dart:io'
+    var iosDeviceInfo = await deviceInfo.iosInfo;
+    uniqueDeviceId = '${iosDeviceInfo.identifierForVendor}'; // unique ID on iOS
+  } else if (Platform.isAndroid) {
+    var androidDeviceInfo = await deviceInfo.androidInfo;
+    uniqueDeviceId = androidDeviceInfo.id ; // unique ID on Android
+  }
+
       setState(() {
         url = url;
       });
@@ -194,6 +206,7 @@ class _StudentID extends State<StudentID> {
           'name': name.text,
           'student_id': student_id.text,
           'url': url,
+          'device_info': uniqueDeviceId,
         };
 
         dbRef!.push().set(Student).whenComplete(() {

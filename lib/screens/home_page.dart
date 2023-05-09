@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:local_auth_ex/screens/profile.dart';
@@ -19,6 +20,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // pagecontroller
   final _controller = PageController();
+  final nameRef = FirebaseDatabase.instance.ref("students/-NUzjefy6wYLXN9y0FZD");
+
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 IconButton(
                   onPressed: () async {
+                    readData();
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => Profile()),
                     );
@@ -129,5 +133,9 @@ class _HomePageState extends State<HomePage> {
         ]),
       ),
     );
+  }
+      readData() async {
+      DatabaseEvent event = await nameRef.once();
+      print(event.snapshot.value);
   }
 }

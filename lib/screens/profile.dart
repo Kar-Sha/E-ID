@@ -2,6 +2,10 @@
 
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
+import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:local_auth_ex/screens/home_page.dart';
@@ -14,12 +18,15 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
-
+  
   @override
   State<Profile> createState() => _Profile();
 }
 
 class _Profile extends State<Profile> {
+  final ref = FirebaseDatabase.instance.ref("students/-NUzjefy6wYLXN9y0FZD");
+  //ref.once(value,function(snapshot{var name = snapshot.val().name;}))
+  String name = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,6 +104,14 @@ class _Profile extends State<Profile> {
 
             SizedBox(height: 50),
 
+
+            // FirebaseAnimatedList(
+            //   query: ref, 
+            //   itemBuilder: (context, snapshot, animation, index) {
+            //     return ListTile(
+            //       title: Text(snapshot.child("name").value.toString()));
+            //   },
+            // ),
             Text(
               'Name',
               style: TextStyle(
@@ -105,7 +120,7 @@ class _Profile extends State<Profile> {
               ),
             ),
             Text(
-              'FirstN LastN',
+              name,
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -181,5 +196,9 @@ class _Profile extends State<Profile> {
         ),
       ),
     );
+  }
+    void readName(String name) async {
+      DatabaseEvent event = await ref.once();
+      name = event.snapshot.child("name").value.toString();
   }
 }
