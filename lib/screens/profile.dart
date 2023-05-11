@@ -11,13 +11,19 @@ import 'package:flutter/rendering.dart';
 import 'package:local_auth_ex/screens/home_page.dart';
 import 'package:local_auth_ex/screens/new_login.dart';
 import 'package:local_auth_ex/screens/settings.dart';
+import 'package:local_auth_ex/provider/authentication/login_provider.dart';
+import 'package:local_auth_ex/widgets/button.dart';
 import 'package:local_auth_ex/widgets/home_list.dart';
 import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
+
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({super.key});
   
   @override
   State<Profile> createState() => _Profile();
@@ -49,9 +55,7 @@ class _Profile extends State<Profile> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
                   },
                   icon: Icon(
                     Icons.home_filled,
@@ -60,9 +64,7 @@ class _Profile extends State<Profile> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Settings()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.settingsRouteName);
                   },
                   icon: Icon(
                     Icons.info,
@@ -173,25 +175,38 @@ class _Profile extends State<Profile> {
 
             SizedBox(height: 130),
 
-            Container(
-              child: TextButton(
-                onPressed: () async {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => Newlogin()),
-                  );
-                },
-                child: const Text(
-                  "Logout",
-                ),
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.only(
-                      top: 16.0, bottom: 16.0, left: 155, right: 155),
-                  primary: Colors.white,
-                  textStyle: const TextStyle(fontSize: 16),
-                  backgroundColor: Colors.grey[800],
-                ),
-              ),
-            )
+            Consumer<LoginProvider>(
+              builder: (context, snapshot, _) {
+                return customButton(
+                  context: context,
+                  title: "Logout",
+                  isActive: snapshot.isLoading,
+                  onTap: () async {
+                    snapshot.signOutUser(context);
+                  },
+                );
+              },
+            ),
+            SizedBox(height: 24),
+            // Container(
+            //   child: TextButton(
+            //     onPressed: () async {
+            //       Navigator.of(context).pushReplacement(
+            //         MaterialPageRoute(builder: (context) => Newlogin()),
+            //       );
+            //     },
+            //     child: const Text(
+            //       "Logout",
+            //     ),
+            //     style: TextButton.styleFrom(
+            //       padding: const EdgeInsets.only(
+            //           top: 16.0, bottom: 16.0, left: 155, right: 155),
+            //       primary: Colors.white,
+            //       textStyle: const TextStyle(fontSize: 16),
+            //       backgroundColor: Colors.grey[800],
+            //     ),
+            //   ),
+            // )
           ]),
         ),
       ),

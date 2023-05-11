@@ -10,8 +10,11 @@ import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
+
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -20,8 +23,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // pagecontroller
   final _controller = PageController();
-  final nameRef = FirebaseDatabase.instance.ref("students/-NUzjefy6wYLXN9y0FZD");
-
 
   @override
   Widget build(BuildContext context) {
@@ -45,10 +46,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    readData();
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.profileRouteName);
                   },
                   icon: Icon(
                     Icons.person,
@@ -57,9 +55,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Settings()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.settingsRouteName);
                   },
                   icon: Icon(
                     Icons.info,
@@ -133,9 +129,5 @@ class _HomePageState extends State<HomePage> {
         ]),
       ),
     );
-  }
-      readData() async {
-      DatabaseEvent event = await nameRef.once();
-      print(event.snapshot.value);
   }
 }

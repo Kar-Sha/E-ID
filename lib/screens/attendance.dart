@@ -8,6 +8,9 @@ import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
+
 class Attendance extends StatefulWidget {
   const Attendance({Key? key}) : super(key: key);
 
@@ -30,9 +33,7 @@ class _Attendance extends State<Attendance> {
 
             TextButton(
               onPressed: () async {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
               },
               child: const Text(
                 "Back",

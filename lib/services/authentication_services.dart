@@ -116,4 +116,8 @@ class AuthenticationMethods {
     await _auth.sendPasswordResetEmail(email: email).then((value) => showSnackBar(context, "Password reset email sent", Colors.greenAccent));
     if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
   }
+
+  Future getCurrentUser() async {
+    return _auth.currentUser;
+  }
 }

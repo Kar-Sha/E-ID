@@ -12,6 +12,9 @@ import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
+
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
 
@@ -42,9 +45,7 @@ class _Settings extends State<Settings> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
                   },
                   icon: Icon(
                     Icons.home_filled,
@@ -53,9 +54,7 @@ class _Settings extends State<Settings> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.profileRouteName);
                   },
                   icon: Icon(
                     Icons.person,
