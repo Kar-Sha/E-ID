@@ -1,6 +1,7 @@
 class MyAppRouteConstants {
   static const String welcomeRouteName = 'welcome';
   static const String loginRouteName = 'login';
+  static const String newLoginRouteName = 'newLogin';
   static const String registerRouteName = 'register';
   static const String verificationRouteName = 'verify-email';
   static const String resetRouteName = 'reset-password';

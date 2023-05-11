@@ -7,6 +7,9 @@ import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:local_auth_ex/services/auth.dart';
 
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
+
 class Newlogin extends StatefulWidget {
   const Newlogin({Key? key}) : super(key: key);
 
@@ -59,10 +62,7 @@ class _Newlogin extends State<Newlogin> {
                       children: [
                         TextButton(
                           onPressed: () async {
-                            Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => Onboarding()),
-                            );
+                            goToPageAndRemoveFromStack(context, MyAppRouteConstants.onboardingRouteName);
                           },
                           child: const Text(
                             "Set up Account",
@@ -80,24 +80,25 @@ class _Newlogin extends State<Newlogin> {
                         ),
                         TextButton(
                           onPressed: () async {
-                            bool isAuthenticated =
-                                await AuthService.authenticateUser();
-                            if (isAuthenticated) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomePage()),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Authentication failed.'),
-                                ),
-                              );
-                            }
+                            goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
+                            // bool isAuthenticated =
+                            //     await AuthService.authenticateUser();
+                            // if (isAuthenticated) {
+                            //   Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => const HomePage()),
+                            //   );
+                            // } else {
+                            //   ScaffoldMessenger.of(context).showSnackBar(
+                            //     const SnackBar(
+                            //       content: Text('Authentication failed.'),
+                            //     ),
+                            //   );
+                            // }
                           },
                           child: const Text(
-                            "Login with ID",
+                            "Login",
                           ),
                           style: TextButton.styleFrom(
                             padding: const EdgeInsets.only(

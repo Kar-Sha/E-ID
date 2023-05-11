@@ -12,6 +12,9 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
 //import 'package:local_auth_ex/main.dart';
 
 class StudentID extends StatefulWidget {
@@ -60,9 +63,7 @@ class _StudentID extends State<StudentID> {
                   child: Row(children: [
                     TextButton(
                       onPressed: () async {
-                        Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => GetStarted()),
-                        );
+                        goToPageAndRemoveFromStack(context, MyAppRouteConstants.getStartedRouteName);
                       },
                       child: const Text(
                         "Back",
@@ -215,12 +216,7 @@ class _StudentID extends State<StudentID> {
         };
         String uid = user!.uid;
         dbRef!.child(uid).set(Student).whenComplete(() {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => HomePage(),
-            ),
-          );
+          goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
         });
       }
     } on Exception catch (e) {

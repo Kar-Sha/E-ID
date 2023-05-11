@@ -23,7 +23,7 @@ class SharedPrefHelperFunction {
     if (repeat == true) {
       if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
     } else if(repeat == false || repeat == null){
-      if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
+      if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.newLoginRouteName);
     }
   }
 }

@@ -38,7 +38,7 @@ class LoginProvider extends ChangeNotifier {
         _isLoading = false;
         notifyListeners();
         SharedPrefHelperFunction.saveLoggedInState(false);
-        goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
+        goToPageAndRemoveFromStack(context, MyAppRouteConstants.newLoginRouteName);
       },
     );
   }

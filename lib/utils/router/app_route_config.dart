@@ -2,6 +2,7 @@ import 'package:local_auth_ex/screens/attendance.dart';
 import 'package:local_auth_ex/screens/get_started.dart';
 import 'package:local_auth_ex/screens/home_page.dart';
 import 'package:local_auth_ex/screens/login_screen.dart';
+import 'package:local_auth_ex/screens/new_login.dart';
 import 'package:local_auth_ex/screens/onboarding.dart';
 import 'package:local_auth_ex/screens/profile.dart';
 import 'package:local_auth_ex/screens/questions.dart';
@@ -39,6 +40,13 @@ class MyAppRouter {
         path: '/login',
         pageBuilder: (context, state) {
           return const MaterialPage(child: LoginScreen());
+        },
+      ),
+      GoRoute(
+        name: MyAppRouteConstants.newLoginRouteName,
+        path: '/newLogin',
+        pageBuilder: (context, state) {
+          return const MaterialPage(child: Newlogin());
         },
       ),
       GoRoute(
