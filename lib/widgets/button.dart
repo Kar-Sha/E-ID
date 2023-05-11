@@ -14,7 +14,7 @@ Widget customButton(
       height: 56.h,
       alignment: Alignment.center,
       decoration: BoxDecoration(
-        color: Theme.of(context!).primaryColor,
+        color: Colors.grey[500],
         borderRadius: BorderRadius.circular(16.r),
       ),
       // alignment: Alignment.center,
@@ -28,7 +28,7 @@ Widget customButton(
             )
           : Text(
               title,
-              style: CustomTextStyle.regularBold16
+              style: TextStyle(fontSize: 16)
                   .copyWith(color: const Color(0xFFFFFFFF)),
             ),
     ),

@@ -24,13 +24,17 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(
-          "E-ID",
-          style: CustomTextStyle.bold40
-              .copyWith(color: Theme.of(context).primaryColor),
-        ),
-      ),
-    );
+        backgroundColor: Colors.blue[900],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'lib/images/logo.png',
+                height: 150,
+              ),
+            ],
+          ),
+        ));
   }
 }

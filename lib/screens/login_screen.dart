@@ -32,16 +32,15 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: Colors.grey[900],
         leading: InkWell(
           onTap: () {
             popPageFromStack(context);
           },
-          child: Image.asset(
-            "assets/icons/backicon.png",
-          ),
+          child: Icon(Icons.arrow_back),
         ),
       ),
       body: SingleChildScrollView(
@@ -49,26 +48,37 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 21.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Image.asset(
+                  'lib/images/logo.png',
+                  height: 80,
+                ),
+              ],
+            ),
 
             // the login text
             Text("Login",
-                style: CustomTextStyle.bold32
-                    .copyWith(color: Theme.of(context).primaryColor)),
+                style:
+                    CustomTextStyle.bold32.copyWith(color: Colors.grey[100])),
             SizedBox(height: 19.h),
-            Text("Login now to track all your expenses\nand income at a place!",
-                style: CustomTextStyle.regular16),
+            Text("Login with your school email and password",
+                style: TextStyle(color: Colors.white, fontSize: 16)),
 
             // the textfields
             SizedBox(height: 40.h),
             customInputField(
               context: context,
               labelText: "Email",
-              hintText: "Ex: abc@example.com",
+              hintText: "email@example.com",
               prefixIcon: SizedBox(
                 height: 19.18.h,
                 width: 19.2.w,
-                child: Image.asset("assets/images/at.png"),
+                child: Image.asset(
+                  "assets/images/at.png",
+                  color: Colors.blue[900],
+                ),
               ),
               controller: emailController,
             ),
@@ -80,7 +90,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 prefixIcon: SizedBox(
                   height: 19.h,
                   width: 16.9.w,
-                  child: Image.asset("assets/icons/lock.png"),
+                  child: Image.asset("assets/icons/lock.png",
+                      color: Colors.blue[900]),
                 ),
                 controller: passwordController,
                 obscureText: true),
@@ -94,9 +105,8 @@ class _LoginScreenState extends State<LoginScreen> {
               },
               child: Text(
                 "Forgot Password?",
-                style: CustomTextStyle.regular12.copyWith(
-                    color: Theme.of(context).primaryColor,
-                    decoration: TextDecoration.underline),
+                style: CustomTextStyle.regular16.copyWith(
+                    color: Colors.white, decoration: TextDecoration.underline),
               ),
             ),
 
@@ -127,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: 28.h),
             const Divider(
               height: 1,
-              color: Color(0xFF000000),
+              color: Colors.white,
             ),
 
             //continue with google button
