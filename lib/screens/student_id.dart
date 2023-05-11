@@ -11,6 +11,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:local_auth_ex/main.dart';
 
 class StudentID extends StatefulWidget {
@@ -28,6 +29,8 @@ class _StudentID extends State<StudentID> {
   ImagePicker image = ImagePicker();
   var url;
   DatabaseReference? dbRef;
+  User? user = FirebaseAuth.instance.currentUser;
+  
   @override
   void initState() {
     super.initState();
@@ -142,7 +145,7 @@ class _StudentID extends State<StudentID> {
                         onPressed: () async {
                           if (file != null) {
                             uploadFile();
-                          }                          /*
+                          } /*
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(builder: (context) => HomePage()),
                           );
@@ -169,7 +172,7 @@ class _StudentID extends State<StudentID> {
   }
 
   getImage() async {
-    var img = await image.pickImage(source: ImageSource.camera);
+    var img = await image.pickImage(source: ImageSource.gallery);
     setState(() {
       file = File(img!.path);
     });
@@ -188,15 +191,17 @@ class _StudentID extends State<StudentID> {
       url = await snapshot.ref.getDownloadURL();
       String uniqueDeviceId = '';
 
-  var deviceInfo = DeviceInfoPlugin();
+      var deviceInfo = DeviceInfoPlugin();
 
-  if (Platform.isIOS) { // import 'dart:io'
-    var iosDeviceInfo = await deviceInfo.iosInfo;
-    uniqueDeviceId = '${iosDeviceInfo.identifierForVendor}'; // unique ID on iOS
-  } else if (Platform.isAndroid) {
-    var androidDeviceInfo = await deviceInfo.androidInfo;
-    uniqueDeviceId = androidDeviceInfo.id ; // unique ID on Android
-  }
+      if (Platform.isIOS) {
+        // import 'dart:io'
+        var iosDeviceInfo = await deviceInfo.iosInfo;
+        uniqueDeviceId =
+            '${iosDeviceInfo.identifierForVendor}'; // unique ID on iOS
+      } else if (Platform.isAndroid) {
+        var androidDeviceInfo = await deviceInfo.androidInfo;
+        uniqueDeviceId = androidDeviceInfo.id; // unique ID on Android
+      }
 
       setState(() {
         url = url;
@@ -208,8 +213,8 @@ class _StudentID extends State<StudentID> {
           'url': url,
           'device_info': uniqueDeviceId,
         };
-
-        dbRef!.push().set(Student).whenComplete(() {
+        String uid = user!.uid;
+        dbRef!.child(uid).set(Student).whenComplete(() {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

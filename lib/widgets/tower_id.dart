@@ -1,9 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+final User? user = FirebaseAuth.instance.currentUser;
+final String uid = user!.uid;
+final DatabaseReference nameRef =
+    FirebaseDatabase.instance.ref('students').child(uid).child('name');
+final DatabaseReference idRef =
+    FirebaseDatabase.instance.ref('students').child(uid).child('student_id');
 
 class TowerCard extends StatelessWidget {
   const TowerCard({Key? key}) : super(key: key);
@@ -56,27 +66,45 @@ class TowerCard extends StatelessWidget {
               Container(
                 padding: EdgeInsets.only(left: 20, bottom: 17),
                 alignment: Alignment.centerLeft,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Text(
-                      "NAME",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      "STUDENT",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      "*********",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
+                child: FutureBuilder(
+                  future: Future.wait([getStudentName(),getStudentID()]),
+                  builder: ((context, AsyncSnapshot<List<dynamic>>snapshot) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      // ignore: prefer_const_literals_to_create_immutables
+                      children: [
+                        Text(
+                          //"NAME",
+                          snapshot.data![0].toString(),
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          "STUDENT",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                        Text(
+                          snapshot.data![1].toString(),
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ],
+                    );
+                  }),
                 ),
               )
             ],
           )),
     );
+  }
+
+  Future<Object?> getStudentName() async {
+    DatabaseEvent event = await nameRef.once();
+    Object? result = event.snapshot.value;
+    return result;
+  }
+
+  Future<Object?> getStudentID() async {
+    DatabaseEvent event = await idRef.once();
+    Object? result = event.snapshot.value;
+    return result;
   }
 }
