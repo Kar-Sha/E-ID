@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:barcode_widget/barcode_widget.dart';
 
 class TowerCardBack extends StatelessWidget {
   const TowerCardBack({Key? key}) : super(key: key);
@@ -27,32 +28,39 @@ class TowerCardBack extends StatelessWidget {
               ),
               SizedBox(height: 10),
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Text(
-                      "To report lost or stolen card, contact the San Jose State University Bursar’s office: One Washingtion Square, San Jose, CA 995192 | 408-924-1601 | sjsu.edu/bursar",
-                      style: TextStyle(fontSize: 8),
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      Text(
+                        "To report lost or stolen card, contact the San Jose State University Bursar’s office: One Washingtion Square, San Jose, CA 995192 | 408-924-1601 | sjsu.edu/bursar",
+                        style: TextStyle(fontSize: 8),
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        "National Suicide Prevention Lifeline: 1-800-273-8255",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Text(
+                        "Crisis Text Line: text HOME to 741741",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Text(
+                        "University Police Department: 408-924-2222",
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      SizedBox(height: 10),
+                      BarcodeWidget(
+                        barcode: Barcode.code128(), 
+                        data: TextEditingController().text,
+                        width: 200,
+                        height: 30,
+                        drawText: false,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      "National Suicide Prevention Lifeline: 1-800-273-8255",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      "Crisis Text Line: text HOME to 741741",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                    Text(
-                      "University Police Department: 408-924-2222",
-                      style: TextStyle(fontSize: 12),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                    ],
+                  )),
+              ],
           )),
     );
   }
