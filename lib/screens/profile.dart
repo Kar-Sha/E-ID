@@ -18,23 +18,28 @@ import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
-  
+
   @override
   State<Profile> createState() => _Profile();
 }
 
 class _Profile extends State<Profile> {
-  final ref = FirebaseDatabase.instance.ref("students/-NUzjefy6wYLXN9y0FZD");
+  final User? user = FirebaseAuth.instance.currentUser;
+  final DatabaseReference nameRef =
+      FirebaseDatabase.instance.ref('students').child(uid).child('name');
+  final DatabaseReference idRef =
+      FirebaseDatabase.instance.ref('students').child(uid).child('student_id');
   //ref.once(value,function(snapshot{var name = snapshot.val().name;}))
-  String name = '';
   @override
   Widget build(BuildContext context) {
+    String uid = user!.uid;
     return Scaffold(
       backgroundColor: Colors.grey[300],
       floatingActionButton: FloatingActionButton(
@@ -55,7 +60,8 @@ class _Profile extends State<Profile> {
               children: [
                 IconButton(
                   onPressed: () async {
-                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
+                    goToPageAndRemoveFromStack(
+                        context, MyAppRouteConstants.homeRouteName);
                   },
                   icon: Icon(
                     Icons.home_filled,
@@ -64,7 +70,8 @@ class _Profile extends State<Profile> {
                 ),
                 IconButton(
                   onPressed: () async {
-                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.settingsRouteName);
+                    goToPageAndRemoveFromStack(
+                        context, MyAppRouteConstants.settingsRouteName);
                   },
                   icon: Icon(
                     Icons.info,
@@ -77,8 +84,12 @@ class _Profile extends State<Profile> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: FutureBuilder(
+             future: Future.wait([getStudentName(), getStudentID()]),
+            builder: ((context, AsyncSnapshot<List<dynamic>> snapshot) {
+              var name = snapshot.data?[0];
+              var id = snapshot.data?[1];
+              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             //app bar
             Padding(
               padding: const EdgeInsets.all(0.0),
@@ -106,9 +117,8 @@ class _Profile extends State<Profile> {
 
             SizedBox(height: 50),
 
-
             // FirebaseAnimatedList(
-            //   query: ref, 
+            //   query: ref,
             //   itemBuilder: (context, snapshot, animation, index) {
             //     return ListTile(
             //       title: Text(snapshot.child("name").value.toString()));
@@ -122,7 +132,7 @@ class _Profile extends State<Profile> {
               ),
             ),
             Text(
-              name,
+              name.toString(),
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -152,7 +162,7 @@ class _Profile extends State<Profile> {
               ),
             ),
             Text(
-              '000000000',
+              id.toString(),
               style: TextStyle(
                 fontSize: 20,
               ),
@@ -207,13 +217,23 @@ class _Profile extends State<Profile> {
             //     ),
             //   ),
             // )
-          ]),
+          ]);}),
+          ),
+              
         ),
       ),
     );
   }
-    void readName(String name) async {
-      DatabaseEvent event = await ref.once();
-      name = event.snapshot.child("name").value.toString();
+
+  Future<Object?> getStudentName() async {
+    DatabaseEvent event = await nameRef.once();
+    Object? result = event.snapshot.value;
+    return result;
+  }
+
+  Future<Object?> getStudentID() async {
+    DatabaseEvent event = await idRef.once();
+    Object? result = event.snapshot.value;
+    return result;
   }
 }

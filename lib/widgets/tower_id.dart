@@ -67,15 +67,18 @@ class TowerCard extends StatelessWidget {
                 padding: EdgeInsets.only(left: 20, bottom: 17),
                 alignment: Alignment.centerLeft,
                 child: FutureBuilder(
-                  future: Future.wait([getStudentName(),getStudentID()]),
-                  builder: ((context, AsyncSnapshot<List<dynamic>>snapshot) {
-                    return Column(
+                  future: Future.wait([getStudentName(), getStudentID()]),
+                  builder: ((context, AsyncSnapshot<List<dynamic>> snapshot) {
+                    var name = snapshot.data?[0];
+                    var id = snapshot.data?[1];
+                    return SingleChildScrollView(
+                        child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
                         Text(
                           //"NAME",
-                          snapshot.data![0].toString(),
+                          name.toString(),
                           style: TextStyle(fontSize: 12),
                         ),
                         Text(
@@ -83,11 +86,11 @@ class TowerCard extends StatelessWidget {
                           style: TextStyle(fontSize: 12),
                         ),
                         Text(
-                          snapshot.data![1].toString(),
+                          id.toString(),
                           style: TextStyle(fontSize: 12),
                         ),
                       ],
-                    );
+                    ));
                   }),
                 ),
               )
