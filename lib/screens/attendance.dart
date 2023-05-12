@@ -1,12 +1,11 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/new_login.dart';
-import 'package:local_auth_ex/screens/settings.dart';
-import 'package:local_auth_ex/widgets/home_list.dart';
-import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../services/auth.dart';
+
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
 
 class Attendance extends StatefulWidget {
   const Attendance({Key? key}) : super(key: key);
@@ -17,6 +16,16 @@ class Attendance extends StatefulWidget {
 
 class _Attendance extends State<Attendance> {
   final TextEditingController textEditingController = TextEditingController();
+  TextEditingController code = TextEditingController();
+  var id = '';
+
+  DatabaseReference? dbRef;
+  @override
+  void initState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('courses');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,15 +33,18 @@ class _Attendance extends State<Attendance> {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 30.0, right: 30.0, top: 25.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          child: FutureBuilder(
+            future: Future.wait([getStudentID()]),
+            builder: ((context, AsyncSnapshot<List<dynamic>> snapshot) {
+              if(snapshot.data != null) {
+                id = snapshot.data?[0];
+              }
+              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             //app bar
 
             TextButton(
               onPressed: () async {
-                Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                );
+                goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
               },
               child: const Text(
                 "Back",
@@ -54,7 +66,7 @@ class _Attendance extends State<Attendance> {
                   ),
                   SizedBox(height: 50),
                   Text(
-                    'Enter Classroom Code',
+                    'Enter Code',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -62,6 +74,7 @@ class _Attendance extends State<Attendance> {
                   ),
                   SizedBox(height: 20),
                   TextField(
+                    controller: code,
                     decoration: InputDecoration(
                       filled: true, //<-- SEE HERE
                       fillColor: Colors.white,
@@ -79,7 +92,19 @@ class _Attendance extends State<Attendance> {
               children: [
                 Container(
                   child: TextButton(
-                    onPressed: () async {},
+                    onPressed: () async {
+                      bool isAuthenticated =
+                                await AuthService.authenticateUser();
+                            if (isAuthenticated) {
+                              upload();
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Authentication failed.'),
+                                ),
+                              );
+                            }
+                    },
                     child: const Text(
                       "Check-In",
                     ),
@@ -94,9 +119,23 @@ class _Attendance extends State<Attendance> {
                 ),
               ],
             )
-          ]),
+          ]);}),
         ),
       ),
-    );
+    ));
+  }
+  upload() async {
+    try {
+        dbRef!.child(code.text).child(id).set('checked-in').whenComplete(() {
+          goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
+        });
+    } on Exception catch (e) {
+      print(e);
+    }
+  }
+  Future<Object?> getStudentID() async {
+    DatabaseEvent event = await idRef.once();
+    Object? result = event.snapshot.value;
+    return result;
   }
 }

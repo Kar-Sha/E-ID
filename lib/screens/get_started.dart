@@ -1,8 +1,7 @@
-// Select School
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:local_auth_ex/screens/onboarding.dart';
-import 'package:local_auth_ex/screens/student_id.dart';
+
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
 
 class GetStarted extends StatefulWidget {
   const GetStarted({Key? key}) : super(key: key);
@@ -36,9 +35,7 @@ class _GetStartedState extends State<GetStarted> {
                 child: Row(children: [
                   TextButton(
                     onPressed: () async {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => Onboarding()),
-                      );
+                      goToPageAndRemoveFromStack(context, MyAppRouteConstants.onboardingRouteName);
                     },
                     child: const Text(
                       "Back",
@@ -101,9 +98,7 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => StudentID()),
-                      );
+                      goToPageAndRemoveFromStack(context, MyAppRouteConstants.registerRouteName);
                     },
                     child: const Text(
                       "Next",

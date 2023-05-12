@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth_ex/screens/get_started.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/new_login.dart';
 import 'package:local_auth_ex/widgets/onboarding_list.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({Key? key}) : super(key: key);
@@ -30,9 +30,7 @@ class _Onboarding extends State<Onboarding> {
                 child: Row(children: [
                   TextButton(
                     onPressed: () async {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => Newlogin()),
-                      );
+                      goToPageAndRemoveFromStack(context, MyAppRouteConstants.newLoginRouteName);
                     },
                     child: const Text(
                       "Back",
@@ -86,9 +84,7 @@ class _Onboarding extends State<Onboarding> {
                   style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 onPressed: () async {
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(builder: (context) => GetStarted()),
-                  );
+                  goToPageAndRemoveFromStack(context, MyAppRouteConstants.getStartedRouteName);
                 },
               ))
           : Container(

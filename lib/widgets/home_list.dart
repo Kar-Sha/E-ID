@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth_ex/screens/attendance.dart';
-import 'package:local_auth_ex/screens/questions.dart';
-import 'package:local_auth_ex/screens/view_history.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../utils/router/app_route_constants.dart';
+import '../utils/routes.dart';
 
 class HomeList extends StatelessWidget {
   const HomeList({Key? key}) : super(key: key);
@@ -55,9 +55,7 @@ class HomeList extends StatelessWidget {
 
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Attendance()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.attendanceRouteName);
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios,
@@ -104,9 +102,7 @@ class HomeList extends StatelessWidget {
 
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => History()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.viewHistoryRouteName);
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios,
@@ -152,9 +148,7 @@ class HomeList extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () async {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => Questions()),
-                    );
+                    goToPageAndRemoveFromStack(context, MyAppRouteConstants.questionsRouteName);
                   },
                   icon: Icon(
                     Icons.arrow_forward_ios,
