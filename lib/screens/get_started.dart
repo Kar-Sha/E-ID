@@ -102,7 +102,7 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                   TextButton(
                     onPressed: () async {
-                      goToPageAndRemoveFromStack(context, MyAppRouteConstants.studentIDRouteName);
+                      goToPageAndRemoveFromStack(context, MyAppRouteConstants.registerRouteName);
                     },
                     child: const Text(
                       "Next",

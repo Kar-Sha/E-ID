@@ -1,11 +1,14 @@
 import 'dart:io';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:local_auth_ex/utils/router/app_route_constants.dart';
 import 'package:local_auth_ex/utils/routes.dart';
 import 'package:local_auth_ex/utils/snackbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import '../widgets/tower_id.dart';
 
 class AuthenticationMethods {
   final FirebaseAuth _auth;
@@ -76,7 +79,16 @@ class AuthenticationMethods {
           },
         );
       }
-      goToPageAndRemoveFromStack(context!, MyAppRouteConstants.homeRouteName);
+      final String uid = user!.uid;
+      final DatabaseReference userRef = FirebaseDatabase.instance.ref('students').child(uid);
+      DatabaseEvent event = await userRef.once();
+      Object? result = event.snapshot.value;
+      if(result == null) {
+        goToPageAndRemoveFromStack(context!, MyAppRouteConstants.studentIDRouteName);
+      }
+      else {
+        goToPageAndRemoveFromStack(context!, MyAppRouteConstants.homeRouteName);
+      }
       if(context.mounted) showSnackBar(context, "Login successfull", Colors.green);
     } on FirebaseAuthException catch (_) {
       showSnackBar(context!, "email or password does not exist", Colors.red);
@@ -95,7 +107,16 @@ class AuthenticationMethods {
             accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
         await _auth.signInWithCredential(credential);
-        if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
+        final String uid = user!.uid;
+        final DatabaseReference userRef = FirebaseDatabase.instance.ref('students').child(uid);
+        DatabaseEvent event = await userRef.once();
+        Object? result = event.snapshot.value;
+        if(result == null) {
+          goToPageAndRemoveFromStack(context, MyAppRouteConstants.studentIDRouteName);
+        }
+        else {
+          if(context.mounted) goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
+        }
         if(context.mounted) showSnackBar(context, "Sign-in successful", Colors.green);
       }
     } on FirebaseAuthException catch (_) {

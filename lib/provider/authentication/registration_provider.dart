@@ -16,7 +16,7 @@ class RegistrationProvider extends ChangeNotifier {
   Future registerUser({
     required String email,
     required String password,
-    required String fullName,
+    //required String fullName,
     required BuildContext context,
   }) async {
     _isLoading = true;
@@ -27,7 +27,7 @@ class RegistrationProvider extends ChangeNotifier {
       (value) {
         _isLoading = false;
         notifyListeners();
-        SharedPrefHelperFunction.saveUserFullName(fullName);
+        //SharedPrefHelperFunction.saveUserFullName(fullName);
         AuthenticationMethods(_auth).sendVerificationEmail();
       },
     );
