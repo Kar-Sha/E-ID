@@ -17,17 +17,16 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        backgroundColor: Colors.grey[900],
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: const Color(0xFFFFFFFF),
         leading: InkWell(
           onTap: () {
             popPageFromStack(context);
           },
-          child: Image.asset(
-            "assets/icons/backicon.png",
-          ),
+          child: Icon(Icons.arrow_back),
         ),
       ),
       body: SingleChildScrollView(
@@ -39,13 +38,14 @@ class _VerificationScreenState extends State<VerificationScreen> {
 
             // the register text
             Text("Register",
-                style: CustomTextStyle.bold32
-                    .copyWith(color: Theme.of(context).primaryColor)),
+                style:
+                    CustomTextStyle.bold32.copyWith(color: Colors.grey[100])),
             SizedBox(height: 19.h),
 
             Text(
-                "We have sent an email to your email\naccount with a verification link!",
-                style: CustomTextStyle.regular16),
+              "We have sent an email to your email\naccount with a verification link!",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+            ),
 
             // continue button
             SizedBox(height: 58.h),
