@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/onboarding.dart';
-import 'package:local_auth_ex/screens/student_id.dart';
-import 'package:local_auth_ex/widgets/onboarding_list.dart';
-import 'package:local_auth_ex/widgets/tower_id.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:local_auth_ex/services/auth.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';

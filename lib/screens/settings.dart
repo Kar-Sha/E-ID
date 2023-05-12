@@ -3,14 +3,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/settings.dart';
-import 'package:local_auth_ex/screens/profile.dart';
-import 'package:local_auth_ex/widgets/home_list.dart';
-import 'package:local_auth_ex/widgets/tower_back.dart';
-import 'package:local_auth_ex/widgets/tower_id.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';

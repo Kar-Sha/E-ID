@@ -1,7 +1,11 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
+
+final User? user = FirebaseAuth.instance.currentUser;
+final String userid = user!.uid;
 
 class TowerCardBack extends StatelessWidget {
   const TowerCardBack({Key? key}) : super(key: key);
@@ -51,16 +55,24 @@ class TowerCardBack extends StatelessWidget {
                         style: TextStyle(fontSize: 12),
                       ),
                       SizedBox(height: 10),
-                      BarcodeWidget(
-                        barcode: Barcode.code128(), 
-                        data: TextEditingController().text,
-                        width: 200,
-                        height: 30,
-                        drawText: false,
-                    ),
+                      Card(
+                        color: Colors.white,
+                        elevation: 2,
+                        shadowColor: Colors.amber,
+                        child: Padding(
+                          padding: EdgeInsets.all(4),
+                          child: BarcodeWidget(
+                            barcode: Barcode.code128(),
+                            data: userid,
+                            width: 200,
+                            height: 30,
+                            drawText: false,
+                          ),
+                        ),
+                      ),
                     ],
                   )),
-              ],
+            ],
           )),
     );
   }

@@ -1,8 +1,4 @@
-// Select School
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:local_auth_ex/screens/onboarding.dart';
-import 'package:local_auth_ex/screens/student_id.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';

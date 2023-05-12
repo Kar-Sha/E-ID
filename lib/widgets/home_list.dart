@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth_ex/screens/attendance.dart';
-import 'package:local_auth_ex/screens/questions.dart';
-import 'package:local_auth_ex/screens/view_history.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/router/app_route_constants.dart';

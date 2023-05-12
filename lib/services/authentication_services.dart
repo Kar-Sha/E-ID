@@ -83,6 +83,8 @@ class AuthenticationMethods {
       final DatabaseReference userRef = FirebaseDatabase.instance.ref('students').child(uid);
       DatabaseEvent event = await userRef.once();
       Object? result = event.snapshot.value;
+      print(uid);
+      print(user);
       if(result == null) {
         goToPageAndRemoveFromStack(context!, MyAppRouteConstants.studentIDRouteName);
       }
@@ -111,6 +113,9 @@ class AuthenticationMethods {
         final DatabaseReference userRef = FirebaseDatabase.instance.ref('students').child(uid);
         DatabaseEvent event = await userRef.once();
         Object? result = event.snapshot.value;
+        print(uid);
+        print(user);
+
         if(result == null) {
           goToPageAndRemoveFromStack(context, MyAppRouteConstants.studentIDRouteName);
         }
@@ -129,7 +134,11 @@ class AuthenticationMethods {
 
   // SIGN-OUT
   Future<void> signOut(BuildContext context) async {
+    await GoogleSignIn().signOut();
+    await GoogleSignIn().disconnect();
     await _auth.signOut();
+    // await FirebaseAuth.instance.signOut();
+    showSnackBar(context, "Sign-out successful", Colors.green);
   }
 
   // RESET PASSWORD

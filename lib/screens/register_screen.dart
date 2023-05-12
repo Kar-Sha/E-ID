@@ -20,7 +20,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  //TextEditingController nameController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -28,7 +27,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
-    //nameController.dispose();
   }
 
   @override
@@ -114,18 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              // SizedBox(height: 28.h),
-              // customInputField(
-              //   context: context,
-              //   labelText: "Your name",
-              //   hintText: "Ex: Saul Ramirez",
-              //   prefixIcon: SizedBox(
-              //     height: 19.18.h,
-              //     width: 19.2.w,
-              //     child: Image.asset("assets/icons/person.png"),
-              //   ),
-              //   controller: nameController,
-              // ),
+    
               SizedBox(height: 28.h),
               customInputField(
                 context: context,
@@ -152,20 +139,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onTap: () async {
                       var email = emailController.text.trim();
                       var password = passwordController.text.trim();
-                      //var name = nameController.text.trim();
                       if (formKey.currentState!.validate()) {
                         provider
                             .registerUser(
                           email: email,
                           password: password,
-                          //fullName: name,
                           context: context,
                         )
                             .then(
                           (value) {
                             emailController.clear();
                             passwordController.clear();
-                            //nameController.clear();
                           },
                         );
                       }
