@@ -1,3 +1,4 @@
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:local_auth_ex/helpers/shared_pref.dart';
 import 'package:local_auth_ex/services/authentication_services.dart';
 import 'package:local_auth_ex/utils/router/app_route_constants.dart';
@@ -41,6 +42,15 @@ class LoginProvider extends ChangeNotifier {
         goToPageAndRemoveFromStack(context, MyAppRouteConstants.newLoginRouteName);
       },
     );
+    FirebaseAuth.instance
+  .authStateChanges()
+  .listen((User? user) {
+    if (user == null) {
+      print('User is currently signed out!');
+    } else {
+      print('User is signed in!');
+    }
+  });
   }
 
   Future resetPassword(BuildContext context, String email) async {

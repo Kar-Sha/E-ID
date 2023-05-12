@@ -81,21 +81,6 @@ class _Newlogin extends State<Newlogin> {
                         TextButton(
                           onPressed: () async {
                             goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
-                            // bool isAuthenticated =
-                            //     await AuthService.authenticateUser();
-                            // if (isAuthenticated) {
-                            //   Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //         builder: (context) => const HomePage()),
-                            //   );
-                            // } else {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     const SnackBar(
-                            //       content: Text('Authentication failed.'),
-                            //     ),
-                            //   );
-                            // }
                           },
                           child: const Text(
                             "Login",
