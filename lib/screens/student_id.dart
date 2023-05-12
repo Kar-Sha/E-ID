@@ -183,10 +183,11 @@ class _StudentID extends State<StudentID> {
 
   uploadFile() async {
     try {
+      String uid = user!.uid;
       var imagefile = FirebaseStorage.instance
           .ref()
           .child("photo")
-          .child("/${name.text}.jpg");
+          .child("/$uid.jpg");
       UploadTask task = imagefile.putFile(file!);
       TaskSnapshot snapshot = await task;
       url = await snapshot.ref.getDownloadURL();
@@ -214,7 +215,6 @@ class _StudentID extends State<StudentID> {
           'url': url,
           'device_info': uniqueDeviceId,
         };
-        String uid = user!.uid;
         dbRef!.child(uid).set(Student).whenComplete(() {
           goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
         });

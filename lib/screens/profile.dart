@@ -85,141 +85,143 @@ class _Profile extends State<Profile> {
         child: Padding(
           padding: const EdgeInsets.only(left: 25.0, right: 25.0, top: 25.0),
           child: FutureBuilder(
-             future: Future.wait([getStudentName(), getStudentID()]),
+            future: Future.wait([getStudentName(), getStudentID()]),
             builder: ((context, AsyncSnapshot<List<dynamic>> snapshot) {
               var name = snapshot.data?[0];
               var id = snapshot.data?[1];
-              return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            //app bar
-            Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: const [
-                      Text(
-                        "My",
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                        ),
+              return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    //app bar
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: const [
+                              Text(
+                                "My",
+                                style: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                " Profile",
+                                style: TextStyle(fontSize: 28),
+                              )
+                            ],
+                          ),
+                        ],
                       ),
-                      Text(
-                        " Profile",
-                        style: TextStyle(fontSize: 28),
-                      )
-                    ],
-                  ),
-                ],
-              ),
-            ),
+                    ),
 
-            SizedBox(height: 50),
+                    SizedBox(height: 50),
 
-            // FirebaseAnimatedList(
-            //   query: ref,
-            //   itemBuilder: (context, snapshot, animation, index) {
-            //     return ListTile(
-            //       title: Text(snapshot.child("name").value.toString()));
-            //   },
-            // ),
-            Text(
-              'Name',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              name.toString(),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(height: 25),
+                    // FirebaseAnimatedList(
+                    //   query: ref,
+                    //   itemBuilder: (context, snapshot, animation, index) {
+                    //     return ListTile(
+                    //       title: Text(snapshot.child("name").value.toString()));
+                    //   },
+                    // ),
+                    Text(
+                      'Name',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      name.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(height: 25),
 
-            Text(
-              'Institution',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              'San Jose State University',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(height: 25),
+                    Text(
+                      'Institution',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'San Jose State University',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(height: 25),
 
-            Text(
-              'Student ID',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              id.toString(),
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
-            SizedBox(height: 25),
+                    Text(
+                      'Student ID',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      id.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(height: 25),
 
-            Text(
-              'Balance',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Text(
-              '0.00',
-              style: TextStyle(
-                fontSize: 20,
-              ),
-            ),
+                    Text(
+                      'Balance',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      '0.00',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    ),
 
-            SizedBox(height: 130),
+                    SizedBox(height: 130),
 
-            Consumer<LoginProvider>(
-              builder: (context, snapshot, _) {
-                return customButton(
-                  context: context,
-                  title: "Logout",
-                  isActive: snapshot.isLoading,
-                  onTap: () async {
-                    snapshot.signOutUser(context);
-                  },
-                );
-              },
-            ),
-            SizedBox(height: 24),
-            // Container(
-            //   child: TextButton(
-            //     onPressed: () async {
-            //       Navigator.of(context).pushReplacement(
-            //         MaterialPageRoute(builder: (context) => Newlogin()),
-            //       );
-            //     },
-            //     child: const Text(
-            //       "Logout",
-            //     ),
-            //     style: TextButton.styleFrom(
-            //       padding: const EdgeInsets.only(
-            //           top: 16.0, bottom: 16.0, left: 155, right: 155),
-            //       primary: Colors.white,
-            //       textStyle: const TextStyle(fontSize: 16),
-            //       backgroundColor: Colors.grey[800],
-            //     ),
-            //   ),
-            // )
-          ]);}),
+                    Consumer<LoginProvider>(
+                      builder: (context, snapshot, _) {
+                        return customButton(
+                          context: context,
+                          title: "Logout",
+                          isActive: snapshot.isLoading,
+                          onTap: () async {
+                            snapshot.signOutUser(context);
+                          },
+                        );
+                      },
+                    ),
+                    SizedBox(height: 24),
+                    // Container(
+                    //   child: TextButton(
+                    //     onPressed: () async {
+                    //       Navigator.of(context).pushReplacement(
+                    //         MaterialPageRoute(builder: (context) => Newlogin()),
+                    //       );
+                    //     },
+                    //     child: const Text(
+                    //       "Logout",
+                    //     ),
+                    //     style: TextButton.styleFrom(
+                    //       padding: const EdgeInsets.only(
+                    //           top: 16.0, bottom: 16.0, left: 155, right: 155),
+                    //       primary: Colors.white,
+                    //       textStyle: const TextStyle(fontSize: 16),
+                    //       backgroundColor: Colors.grey[800],
+                    //     ),
+                    //   ),
+                    // )
+                  ]);
+            }),
           ),
-              
         ),
       ),
     );
