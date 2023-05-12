@@ -1,5 +1,4 @@
 import 'package:local_auth_ex/helpers/shared_pref.dart';
-import 'package:local_auth_ex/utils/styles.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {

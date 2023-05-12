@@ -1,10 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:local_auth_ex/screens/profile.dart';
-import 'package:local_auth_ex/screens/settings.dart';
 import 'package:local_auth_ex/widgets/home_list.dart';
 import 'package:local_auth_ex/widgets/tower_back.dart';
 import 'package:local_auth_ex/widgets/tower_id.dart';

@@ -1,12 +1,7 @@
 // Select School
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/services.dart';
-import 'package:local_auth_ex/screens/get_started.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/onboarding.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -15,7 +10,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';
-//import 'package:local_auth_ex/main.dart';
 
 class StudentID extends StatefulWidget {
   const StudentID({Key? key}) : super(key: key);

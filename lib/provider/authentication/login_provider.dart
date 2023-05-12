@@ -1,4 +1,3 @@
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:local_auth_ex/helpers/shared_pref.dart';
 import 'package:local_auth_ex/services/authentication_services.dart';
 import 'package:local_auth_ex/utils/router/app_route_constants.dart';

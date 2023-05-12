@@ -20,7 +20,6 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  //TextEditingController nameController = TextEditingController();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   @override
@@ -28,23 +27,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
-    //nameController.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[900],
       appBar: AppBar(
         automaticallyImplyLeading: false,
         elevation: 0,
-        backgroundColor: const Color(0xFFFFFFFF),
+        backgroundColor: Colors.grey[900],
         leading: InkWell(
           onTap: () {
             goToNextPageAndBack(context, MyAppRouteConstants.loginRouteName);
           },
-          child: Image.asset(
-            "assets/icons/backicon.png",
-          ),
+          child: Icon(Icons.arrow_back),
         ),
       ),
       body: SingleChildScrollView(
@@ -54,33 +51,38 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 21.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset(
+                    'lib/images/logo.png',
+                    height: 80,
+                  ),
+                ],
+              ),
 
               // the register text
               Text("Register",
-                  style: CustomTextStyle.bold32
-                      .copyWith(color: Theme.of(context).primaryColor)),
+                  style:
+                      CustomTextStyle.bold32.copyWith(color: Colors.grey[100])),
               SizedBox(height: 19.h),
               RichText(
                 text: TextSpan(
                   text: "Create an",
-                  style:
-                      CustomTextStyle.regular16.copyWith(color: Colors.black),
+                  style: TextStyle(color: Colors.white, fontSize: 16),
                   children: [
                     TextSpan(
                       text: " account",
                       style: CustomTextStyle.regularBold16
-                          .copyWith(color: Theme.of(context).primaryColor),
+                          .copyWith(color: Colors.grey[100]),
                     ),
                     TextSpan(
                       text: " access all the \nfeatures of",
-                      style: CustomTextStyle.regular16
-                          .copyWith(color: Colors.black),
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                     TextSpan(
                       text: " E-ID!",
-                      style: CustomTextStyle.regularBold18
-                          .copyWith(color: Colors.black),
+                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
                   ],
                 ),
@@ -95,7 +97,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 prefixIcon: SizedBox(
                   height: 19.18.h,
                   width: 19.2.w,
-                  child: Image.asset("assets/images/at.png"),
+                  child: Image.asset(
+                    "assets/images/at.png",
+                    color: Colors.blue[900],
+                  ),
                 ),
                 controller: emailController,
                 validator: (value) {
@@ -107,18 +112,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   return null;
                 },
               ),
-              // SizedBox(height: 28.h),
-              // customInputField(
-              //   context: context,
-              //   labelText: "Your name",
-              //   hintText: "Ex: Saul Ramirez",
-              //   prefixIcon: SizedBox(
-              //     height: 19.18.h,
-              //     width: 19.2.w,
-              //     child: Image.asset("assets/icons/person.png"),
-              //   ),
-              //   controller: nameController,
-              // ),
+    
               SizedBox(height: 28.h),
               customInputField(
                 context: context,
@@ -127,7 +121,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 prefixIcon: SizedBox(
                   height: 19.h,
                   width: 16.9.w,
-                  child: Image.asset("assets/icons/lock.png"),
+                  child: Image.asset("assets/icons/lock.png",
+                      color: Colors.blue[900]),
                 ),
                 controller: passwordController,
                 obscureText: true,
@@ -144,20 +139,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     onTap: () async {
                       var email = emailController.text.trim();
                       var password = passwordController.text.trim();
-                      //var name = nameController.text.trim();
                       if (formKey.currentState!.validate()) {
                         provider
                             .registerUser(
                           email: email,
                           password: password,
-                          //fullName: name,
                           context: context,
                         )
                             .then(
                           (value) {
                             emailController.clear();
                             passwordController.clear();
-                            //nameController.clear();
                           },
                         );
                       }
@@ -173,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 firstTitle: "Already have an account? ",
                 secondTitle: "Login",
                 onTap: () {
-                 popPageFromStack(context);
+                  popPageFromStack(context);
                 },
               )
               // the text spans.

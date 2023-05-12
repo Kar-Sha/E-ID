@@ -1,11 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:local_auth_ex/screens/home_page.dart';
-import 'package:local_auth_ex/screens/onboarding.dart';
-import 'package:local_auth_ex/screens/student_id.dart';
-import 'package:local_auth_ex/widgets/onboarding_list.dart';
-import 'package:local_auth_ex/widgets/tower_id.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:local_auth_ex/services/auth.dart';
 
 import '../utils/router/app_route_constants.dart';
 import '../utils/routes.dart';
@@ -57,22 +50,24 @@ class _Newlogin extends State<Newlogin> {
                     height: 25,
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 30.0),
                     child: Column(
                       children: [
                         TextButton(
                           onPressed: () async {
-                            goToPageAndRemoveFromStack(context, MyAppRouteConstants.onboardingRouteName);
+                            goToPageAndRemoveFromStack(context,
+                                MyAppRouteConstants.onboardingRouteName);
                           },
                           child: const Text(
                             "Set up Account",
                           ),
                           style: TextButton.styleFrom(
-                            padding: const EdgeInsets.only(
-                                top: 16.0, bottom: 16.0, left: 110, right: 110),
+                            padding:
+                                const EdgeInsets.only(top: 16.0, bottom: 16.0),
                             primary: Colors.white,
                             textStyle: const TextStyle(fontSize: 16),
                             backgroundColor: Colors.grey[400],
+                            fixedSize: Size(300, 50),
                           ),
                         ),
                         SizedBox(
@@ -80,7 +75,8 @@ class _Newlogin extends State<Newlogin> {
                         ),
                         TextButton(
                           onPressed: () async {
-                            goToPageAndRemoveFromStack(context, MyAppRouteConstants.loginRouteName);
+                            goToPageAndRemoveFromStack(
+                                context, MyAppRouteConstants.loginRouteName);
                           },
                           child: const Text(
                             "Login",
@@ -91,6 +87,7 @@ class _Newlogin extends State<Newlogin> {
                             primary: Colors.white,
                             textStyle: const TextStyle(fontSize: 16),
                             backgroundColor: Colors.grey[700],
+                            fixedSize: Size(300, 50),
                           ),
                         ),
                       ],
