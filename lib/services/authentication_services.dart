@@ -134,8 +134,6 @@ class AuthenticationMethods {
 
   // SIGN-OUT
   Future<void> signOut(BuildContext context) async {
-    await GoogleSignIn().signOut();
-    await GoogleSignIn().disconnect();
     await _auth.signOut();
     // await FirebaseAuth.instance.signOut();
     showSnackBar(context, "Sign-out successful", Colors.green);
