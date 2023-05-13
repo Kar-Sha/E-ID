@@ -10,12 +10,9 @@ import '../utils/routes.dart';
 
 TextEditingController code = TextEditingController();
 var id = '';
+String codeC = '';
 String getCode() {
-  if (code.text != null) {
-    return code.text;
-  } else {
-    return "0000";
-  }
+    return codeC;
 }
 
 String getID() {
@@ -117,9 +114,11 @@ class _Attendance extends State<Attendance> {
                               Container(
                                 child: TextButton(
                                   onPressed: () async {
+                                    codeC = code.text;
                                     bool isAuthenticated =
                                 await AuthService.authenticateUser();
                             if (isAuthenticated) {
+                              getCode();
                               upload();
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
@@ -155,11 +154,21 @@ class _Attendance extends State<Attendance> {
 
   upload() async {
     try {
-      dbRef!.child(code.text).child(id).set(timeStamp).whenComplete(() {
-        goToPageAndRemoveFromStack(context, MyAppRouteConstants.homeRouteName);
-        getCode();
-        getID();
-      });
+      if (code.text != "") {
+        dbRef!.child(code.text).child(id).set(timeStamp).whenComplete(() {
+          goToPageAndRemoveFromStack(
+              context, MyAppRouteConstants.homeRouteName);
+          //getCode();
+          getID();
+        });
+      }
+      else{
+        ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Please Input Class Code.'),
+                                ),
+                              );
+      }
     } on Exception catch (e) {
       print(e);
     }
