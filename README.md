@@ -36,14 +36,21 @@ Register the flutter application with Firebase by inputting the applicationID fo
 ## Set up IOS build
 Biometrics system is built into the applciation properties. For IOS download the GoogleService-info.plist
 ## Contributions
-For further inquiries, feel free to message the following members of our team
-Karan Sharma, karan.sharma01@sjsu.edu
-Kelly Nguyen, kelly.nguyen01@sjsu.edu
-Ohreum Kwon, ohreum.kwon@sjsu.edu
+For further inquiries, feel free to message the following members of our team <br />
+Ohreum Kwon, ohreum.kwon@sjsu.edu <br />
+Kelly Nguyen, kelly.nguyen01@sjsu.edu <br />
+Karan Sharma, karan.sharma01@sjsu.edu <br />
 
-Copyright © 2023
-Oh Reum Kwon, Kelly Nguyen, and Karan Sharma
-ALL RIGHTS RESERVED
+## Demo
+
+
+https://github.com/Kar-Sha/E-ID/assets/76408122/3390cb04-95a0-4508-87d8-ad45ba82c9ec
+
+<br />
+Github Repo: https://github.com/Kar-Sha/E-ID <br />
+Copyright © 2023 
+Oh Reum Kwon, Kelly Nguyen, and Karan Sharma 
+ALL RIGHTS RESERVED 
 
 
 
