@@ -117,9 +117,7 @@ class _Attendance extends State<Attendance> {
                               Container(
                                 child: TextButton(
                                   onPressed: () async {
-                                    upload();
-                                    /*
-                      bool isAuthenticated =
+                                    bool isAuthenticated =
                                 await AuthService.authenticateUser();
                             if (isAuthenticated) {
                               upload();
@@ -129,7 +127,7 @@ class _Attendance extends State<Attendance> {
                                   content: Text('Authentication failed.'),
                                 ),
                               );
-                            } */
+                            }
                                   },
                                   child: const Text(
                                     "Check-In",
